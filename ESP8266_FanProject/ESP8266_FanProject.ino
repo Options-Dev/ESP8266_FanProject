@@ -56,6 +56,8 @@ BLYNK_WRITE(V1) {
 
 BLYNK_CONNECTED() {
   Serial.println("( BLYNK ) CONNECTED SYNC.");
+  Blynk.virtualWrite(V0, 1);
+  Blynk.virtualWrite(V1, 1);
   Blynk.syncVirtual(V0);  // will cause BLYNK_WRITE(V0) to be executed
   Blynk.syncVirtual(V1);  // will cause BLYNK_WRITE(V1) to be executed
 }
@@ -66,6 +68,12 @@ void setup() {
   pinMode(D1, OUTPUT);
   pinMode(D2, OUTPUT);
   pinMode(D3, OUTPUT);
+
+  digitalWrite(D0, 1);
+  digitalWrite(D1, 1);
+  digitalWrite(D2, 1);
+  digitalWrite(D3, 1);
+  
   wifiManager.autoConnect("( FAN ) WIFi-Config.");
   Blynk.begin(auth, ssid, pass, "blynk.cloud", 80);
 }
